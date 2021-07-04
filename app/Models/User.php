@@ -20,6 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'scores',
+        'is_active',
+        'is_admin'
     ];
 
     /**
@@ -40,4 +43,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
+    public function aswers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+    public function attempts()
+    {
+        return $this->belongsToMany(Quiz::class, 'attempts')->as('attempts')->withPivot('score')->withTimestamps();
+    }
 }
