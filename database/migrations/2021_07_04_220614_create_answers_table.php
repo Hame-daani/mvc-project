@@ -14,10 +14,10 @@ class CreateAnswersTable extends Migration
     public function up()
     {
         Schema::create('answers', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('question_id')->constrained();
             $table->foreignId('option_id')->constrained();
-            $table->primary(['user_id', 'question_id', 'option_id']);
             $table->timestamps();
         });
     }
