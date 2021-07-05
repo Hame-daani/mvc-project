@@ -12,9 +12,9 @@
 <body class="antialiased">
     <table>
         @foreach ($books as $book)
-            <tr>
-                <td><a href="{{ route('books.show', $book->id) }}">{{ $book->title }}</a></td>
-            </tr>
+            <ul>
+                <li><a href="{{ route('books.show', $book->id) }}">{{ $book->title }}</a></td>
+            </ul>
         @endforeach
     </table>
 </body>

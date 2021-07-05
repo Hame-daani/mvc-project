@@ -12,16 +12,19 @@
 <body class="antialiased">
     <h1>{{ $book->title }}</h1>
     <p>{{ $book->info }}</p>
-    <img src="{{$book->img}}" alt="">
+    <img src="{{ $book->img }}" alt="">
+    <br>
     <a href="{{ $book->link }}">read</a>
     <h2>Quizzes</h2>
     <table>
         @foreach ($book->quizzes as $quiz)
-            <tr>
-                <td><a href="{{ route('quizzes.show', ['book'=>$book->id,'quiz'=>$quiz->id]) }}">{{ $quiz->title }}</a></td>
-            </tr>
+            <ul>
+                <li><a href="{{ route('quizzes.show', ['quiz' => $quiz->id]) }}">{{ $quiz->title }}</a>
+                </li>
+            </ul>
         @endforeach
     </table>
+    <a href="{{ route('books.quizzes.create', ['book' => $book->id]) }}">new quiz</a>
 </body>
 
 </html>

@@ -12,13 +12,15 @@
 <body class="antialiased">
     <h1>{{ $quiz->title }}</h1>
     <h2>Questions</h2>
+    <form action="" method="post">
         @foreach ($quiz->questions as $question)
-        <h3>{{$question->text}}</h3>
-        @foreach ($question->options as $option)
-            <input type="radio" name="question{{$question->id}}" id="{{$option->id}}">
-            <label for="{{$option->id}}">{{$option->text}}</label>
+            <h4>{{ $question->text }}</h4>
+            @foreach ($question->options as $option)
+                <input type="radio" name="question{{ $question->id }}" id="{{ $option->id }}">
+                <label for="{{ $option->id }}">{{ $option->text }}</label>
+            @endforeach
         @endforeach
-        @endforeach
+    </form>
 </body>
 
 </html>
