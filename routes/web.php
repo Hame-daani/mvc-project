@@ -20,10 +20,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::resources([
-    'books' => BookController::class,
-    'books/{book}/quizzes' => QuizController::class,
-]);
+Route::resource('books', BookController::class);
+Route::resource('books.quizzes', QuizController::class)->shallow();
 
 Route::get('/dashboard', function () {
     return view('dashboard');

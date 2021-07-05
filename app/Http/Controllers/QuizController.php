@@ -16,9 +16,9 @@ class QuizController extends Controller
         return view('quizzes.index')->with(['quizzes' => $book->quizzes]);
     }
 
-    public function create()
+    public function create(Book $book)
     {
-        // return view
+        return view('Quizzes.create')->with(['book' => $book]);
     }
 
     public function store(Request $request)
@@ -37,7 +37,7 @@ class QuizController extends Controller
     }
 
 
-    public function show(Book $book, Quiz $quiz)
+    public function show(Quiz $quiz)
     {
         $quiz->load('questions.options');
         // return $quiz;
