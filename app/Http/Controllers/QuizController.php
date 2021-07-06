@@ -11,8 +11,6 @@ class QuizController extends Controller
 
     public function index(Book $book)
     {
-        // return $book->quizzes;
-
         return view('quizzes.index')->with(['quizzes' => $book->quizzes]);
     }
 
@@ -21,52 +19,45 @@ class QuizController extends Controller
         return view('Quizzes.create')->with(['book' => $book]);
     }
 
-    public function store(Request $request)
+    public function store(Book $book, Request $request)
     {
         $this->validate($request, [
             'title' => 'required',
-            'book_id' => 'required',
-            'user_id' => 'required',
         ]);
-        $book = Quiz::create([
+        $quiz = $book->quizzes()->create([
             'title' => $request->title,
-            'book_id' => $request->book_id,
-            'user_id' => $request->user_id,
+            'user_id' => 1, //TODO: auth for user id
         ]);
-        //
+        return $this->edit($quiz);
     }
 
 
     public function show(Quiz $quiz)
     {
         $quiz->load('questions.options');
-        // return $quiz;
         return view('quizzes.show')->with(['quiz' => $quiz]);
     }
 
     public function edit(Quiz $quiz)
     {
-        // return form with quiz
+        return view('Quizzes.edit')->with(['quiz' => $quiz]);
     }
 
     public function update(Request $request, Quiz $quiz)
     {
         $this->validate($request, [
             'title' => 'required',
-            'book_id' => 'required',
-            'user_id' => 'required',
         ]);
         $quiz->update([
             'title' => $request->title,
-            'book_id' => $request->book_id,
-            'user_id' => $request->user_id,
         ]);
-        //return show with quiz
+        return $this->edit($quiz);
     }
 
     public function destroy(Quiz $quiz)
     {
+        $book = $quiz->book;
         $quiz->delete();
-        //return index
+        return  view('Books.show')->with(['book' => $book]);
     }
 }
