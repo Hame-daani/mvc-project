@@ -28,6 +28,8 @@ Route::resource('books.quizzes', QuizController::class)->shallow();
 
 Route::resource('quizzes.questions', QuestionController::class)->shallow()->only(['store', 'update', 'destroy']);
 
+Route::resource('questions.options', OptionController::class)->shallow()->only(['store', 'destroy']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

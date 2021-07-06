@@ -30,6 +30,8 @@
         <input type="submit" value="update">
     </form>
 
+    <hr>
+
     <h2>Questions:</h2>
 
     <form action="{{ route('quizzes.questions.store', ['quiz' => $quiz->id]) }}" method="post">
@@ -59,9 +61,28 @@
                 <input type="submit" value="update">
             </form>
 
+            <form action="{{ route('questions.options.store', ['question' => $question->id]) }}" method="post">
+                @csrf
+                <input type="text" name="text" id="q_text">
+                <label for="state">is this right answer?</label>
+                <input type="checkbox" name="is_right" id="state">
+                <input type="submit" value="add option">
+            </form>
+
             <ul>
                 @foreach ($question->options as $option)
-                    <li>$option->text</li>
+                    <li>
+                        {{ $option->text }}
+                        @if ($option->is_right)
+                            &#10004;
+                        @endif
+                        <form action="{{ route('options.destroy', ['option' => $option->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" name="delete" value="Delete"
+                                onclick="return confirm('are you sure you want to delte this option?');">
+                        </form>
+                    </li>
                 @endforeach
             </ul>
 
