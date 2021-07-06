@@ -51,13 +51,12 @@ class QuizController extends Controller
         $quiz->update([
             'title' => $request->title,
         ]);
-        return $this->edit($quiz);
+        return back();
     }
 
     public function destroy(Quiz $quiz)
     {
-        $book = $quiz->book;
         $quiz->delete();
-        return  view('Books.show')->with(['book' => $book]);
+        return back();
     }
 }

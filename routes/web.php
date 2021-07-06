@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\OptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,10 @@ Route::get('/', function () {
 });
 
 Route::resource('books', BookController::class);
+
 Route::resource('books.quizzes', QuizController::class)->shallow();
+
+Route::resource('quizzes.questions', QuestionController::class)->shallow()->only(['store', 'update', 'destroy']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
