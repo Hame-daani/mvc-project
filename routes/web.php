@@ -24,6 +24,8 @@ Route::get('/', function () {
 
 Route::resource('books', BookController::class);
 
+Route::post('quizzes/{quiz}/attempt', [QuizController::class, 'attempt'])->name('quizzes.attempt');
+
 Route::resource('books.quizzes', QuizController::class)->shallow();
 
 Route::resource('quizzes.questions', QuestionController::class)->shallow()->only(['store', 'update', 'destroy']);

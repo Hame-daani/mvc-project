@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\Book;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -58,5 +59,21 @@ class QuizController extends Controller
     {
         $quiz->delete();
         return back();
+    }
+
+    public function attempt(Quiz $quiz, Request $request)
+    {
+        // save answers
+        $answers = $request->except('_token');
+        foreach ($answers as $q => $o) {
+            Answer::create([
+                'user_id' => 1, //TODO: auth user id
+                'question_id' => $q,
+                'option_id' => $o,
+            ]);
+        }
+        //TODO: count score
+        //TODO: save attempt
+        return $request->except('_token');
     }
 }
