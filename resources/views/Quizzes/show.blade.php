@@ -11,11 +11,9 @@
 
 <body class="antialiased">
     <h1>{{ $quiz->title }}</h1>
-    <!-- TODO: edit button for owner -->
-    {{-- @if (auth()->user()->id == $quiz->user_id) --}}
-    @if ($quiz->user_id == 1)
+    @can('update', $quiz)
         <a href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">Edit this quiz</a>
-    @endif
+    @endcan
     <h2>Questions</h2>
     <form action="{{ route('quizzes.attempt', ['quiz' => $quiz->id]) }}" method="post">
         @csrf

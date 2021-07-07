@@ -6,13 +6,19 @@ use App\Models\Quiz;
 use App\Models\Book;
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index(Book $book)
     {
-        return view('quizzes.index')->with(['quizzes' => $book->quizzes]);
+        return $book->quizzes;
     }
 
     public function create(Book $book)
@@ -27,7 +33,7 @@ class QuizController extends Controller
         ]);
         $quiz = $book->quizzes()->create([
             'title' => $request->title,
-            'user_id' => 1, //TODO: auth for user id
+            'user_id' => Auth::id(),
         ]);
         return $this->edit($quiz);
     }
@@ -41,11 +47,13 @@ class QuizController extends Controller
 
     public function edit(Quiz $quiz)
     {
+        $this->authorize('update', $quiz);
         return view('Quizzes.edit')->with(['quiz' => $quiz]);
     }
 
     public function update(Request $request, Quiz $quiz)
     {
+        $this->authorize('update', $quiz);
         $this->validate($request, [
             'title' => 'required',
         ]);
@@ -57,6 +65,7 @@ class QuizController extends Controller
 
     public function destroy(Quiz $quiz)
     {
+        $this->authorize('delete', $quiz);
         $quiz->delete();
         return back();
     }
@@ -67,7 +76,7 @@ class QuizController extends Controller
         $answers = $request->except('_token');
         foreach ($answers as $q => $o) {
             Answer::create([
-                'user_id' => 1, //TODO: auth user id
+                'user_id' => Auth::id(),
                 'question_id' => $q,
                 'option_id' => $o,
             ]);

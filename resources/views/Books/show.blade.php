@@ -24,7 +24,9 @@
             </ul>
         @endforeach
     </table>
-    <a href="{{ route('books.quizzes.create', ['book' => $book->id]) }}">new quiz</a>
+    @auth
+        <a href="{{ route('books.quizzes.create', ['book' => $book->id]) }}">new quiz</a>
+    @endauth
 </body>
 
 </html>
