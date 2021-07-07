@@ -41,6 +41,7 @@ class QuizController extends Controller
 
     public function show(Quiz $quiz)
     {
+        $this->authorize('view', $quiz);
         $quiz->load('questions.options');
         return view('quizzes.show')->with(['quiz' => $quiz]);
     }

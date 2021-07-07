@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
 
     public function store(Quiz $quiz, Request $request)
     {
+        $this->authorize('update', $quiz);
         $this->validate($request, [
             'text' => 'required',
         ]);
@@ -22,6 +27,7 @@ class QuestionController extends Controller
 
     public function update(Request $request, Question $question)
     {
+        $this->authorize('update', $question->quiz);
         $this->validate($request, [
             'text' => 'required',
         ]);
@@ -34,6 +40,7 @@ class QuestionController extends Controller
 
     public function destroy(Question $question)
     {
+        $this->authorize('update', $question->quiz);
         $question->delete();
         return back();
     }

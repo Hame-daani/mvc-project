@@ -17,6 +17,13 @@ class QuizPolicy
             return true;
         }
     }
+    public function view(User $user, Quiz $quiz)
+    {
+        //
+        return $quiz->is_active
+            ? Response::allow()
+            : Response::deny('this quiz is not activated');
+    }
     public function update(User $user, Quiz $quiz)
     {
         //

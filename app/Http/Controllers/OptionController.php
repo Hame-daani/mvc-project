@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class OptionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
 
     public function store(Question $question, Request $request)
     {
+        $this->authorize('update', $question->quiz);
         $this->validate($request, [
             'text' => 'required',
         ]);
@@ -23,6 +28,7 @@ class OptionController extends Controller
 
     public function destroy(Option $option)
     {
+        $this->authorize('update', $option->question->quiz);
         $option->delete();
         return back();
     }
