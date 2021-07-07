@@ -15,6 +15,10 @@
     <img src="{{ $book->img }}" alt="">
     <br>
     <a href="{{ $book->link }}">read</a>
+    <br>
+    @can('admin')
+        <a href="{{ route('books.edit', ['book' => $book->id]) }}">Edit this book</a>
+    @endcan
     <h2>Quizzes</h2>
     <table>
         @foreach ($book->quizzes as $quiz)
