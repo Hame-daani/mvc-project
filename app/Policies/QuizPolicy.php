@@ -19,7 +19,8 @@ class QuizPolicy
     }
     public function view(User $user, Quiz $quiz)
     {
-        //
+        if ($user->id === $quiz->user_id)
+            return true;
         return $quiz->is_active
             ? Response::allow()
             : Response::deny('this quiz is not activated');
