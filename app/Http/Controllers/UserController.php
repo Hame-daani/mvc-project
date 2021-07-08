@@ -14,14 +14,14 @@ class UserController extends Controller
 
     public function index()
     {
-        // authorize
+        $this->authorize('admin');
         $users = User::all();
         return view('Users.index')->with(['users' => $users]);
     }
 
     public function show(User $user)
     {
-        //authorize
+        $this->authorize('view', $user);
         //TODO my attemps maybe?
         $user->load('quizzes');
         //$user->load('attempts');
@@ -30,13 +30,13 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        //authorize
+        $this->authorize('update', $user);
         return view('users.edit')->with(['user' => $user]);
     }
 
     public function update(Request $request, User $user)
     {
-        // $this->authorize('admin');
+        $this->authorize('update', $user);
         $input = collect(request()->all())->filter()->all();
         $user->update($input);
         return back();
@@ -44,14 +44,14 @@ class UserController extends Controller
 
     public function toggle(User $user)
     {
-        //authorize
+        $this->authorize('update', $user);
         $user->is_active = !$user->is_active;
         $user->save();
         return back();
     }
     public function admin(User $user)
     {
-        //authorize
+        $this->authorize('update', $user);
         $user->is_admin = !$user->is_admin;
         $user->save();
         return back();

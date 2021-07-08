@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Policies\QuizPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
@@ -17,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Quiz::class => QuizPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
