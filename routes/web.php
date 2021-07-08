@@ -27,7 +27,7 @@ Route::get('/', function () {
 Route::resource('books', BookController::class);
 Route::post('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
 Route::post('users/{user}/admin', [UserController::class, 'admin'])->name('users.admin');
-Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)->only(['index', 'show', 'edit', 'update']);
 Route::get('quizzes', [QuizController::class, 'index'])->name('quizzes.index');
 Route::post('quizzes/{quiz}/toggle', [QuizController::class, 'toggle'])->name('quizzes.toggle');
 Route::post('quizzes/{quiz}/attempt', [QuizController::class, 'attempt'])->name('quizzes.attempt');

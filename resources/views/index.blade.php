@@ -18,6 +18,8 @@
                 Log out
             </button>
         </form>
+        <br>
+        <a href="{{ route('users.show', ['user' => Auth::id()]) }}">my profile</a>
     @endauth
     <br>
     @guest
