@@ -14,6 +14,9 @@
     @can('update', $quiz)
         <a href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">Edit this quiz</a>
     @endcan
+    @if (!$quiz->is_active)
+        <p style="color: red">this quiz is deactive!</p>
+    @endif
     <h2>Questions</h2>
     <form action="{{ route('quizzes.attempt', ['quiz' => $quiz->id]) }}" method="post">
         @csrf

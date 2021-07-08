@@ -62,6 +62,7 @@ class QuizController extends Controller
         ]);
         $quiz->update([
             'title' => $request->title,
+            'is_active' => 0,
         ]);
         return back();
     }
