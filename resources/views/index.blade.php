@@ -15,18 +15,20 @@
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit">
-                {{ __('Log out') }}
+                Log out
             </button>
         </form>
     @endauth
+    <br>
     @guest
         <a href="{{ route('login') }}">login</a>
+        <br>
         <a href="{{ route('register') }}">Register</a>
     @endguest
-    <!-- TODO: define admin guard -->
-    {{-- @auth('admin')
-        <h1>hi admin</h1>
-    @endauth --}}
+    @can('admin')
+        <a href="{{ route('quizzes.index') }}">quizzes</a>
+    @endcan
+    <br>
     <a href="{{ route('books.index') }}">books</a>
 </body>
 

@@ -23,13 +23,11 @@ Route::get('/', function () {
 });
 
 Route::resource('books', BookController::class);
-
+Route::get('quizzes', [QuizController::class, 'index'])->name('quizzes.index');
+Route::post('quizzes/{quiz}/toggle', [QuizController::class, 'toggle'])->name('quizzes.toggle');
 Route::post('quizzes/{quiz}/attempt', [QuizController::class, 'attempt'])->name('quizzes.attempt');
-
 Route::resource('books.quizzes', QuizController::class)->shallow();
-
 Route::resource('quizzes.questions', QuestionController::class)->shallow()->only(['store', 'update', 'destroy']);
-
 Route::resource('questions.options', OptionController::class)->shallow()->only(['store', 'destroy']);
 
 Route::get('/dashboard', function () {

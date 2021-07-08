@@ -16,9 +16,11 @@ class QuizController extends Controller
         $this->middleware('auth')->except('index');
     }
 
-    public function index(Book $book)
+    public function index()
     {
-        return $book->quizzes;
+        $this->authorize('admin');
+        $quizzes = Quiz::all();
+        return view('Quizzes.index')->with(['quizzes' => $quizzes]);
     }
 
     public function create(Book $book)
@@ -68,7 +70,7 @@ class QuizController extends Controller
     {
         $this->authorize('delete', $quiz);
         $quiz->delete();
-        return back();
+        return back(); //TODO: dont go back!
     }
 
     public function attempt(Quiz $quiz, Request $request)
@@ -85,5 +87,12 @@ class QuizController extends Controller
         //TODO: count score
         //TODO: save attempt
         return $request->except('_token');
+    }
+    public function toggle(Quiz $quiz)
+    {
+        $this->authorize('admin');
+        $quiz->is_active = !$quiz->is_active;
+        $quiz->save();
+        return back();
     }
 }

@@ -21,12 +21,14 @@
     @endcan
     <h2>Quizzes</h2>
     <table>
-        @foreach ($book->quizzes as $quiz)
-            <ul>
-                <li><a href="{{ route('quizzes.show', ['quiz' => $quiz->id]) }}">{{ $quiz->title }}</a>
-                </li>
-            </ul>
-        @endforeach
+        <ul>
+            @foreach ($book->quizzes as $quiz)
+                @can('view', $quiz)
+                    <li><a href="{{ route('quizzes.show', ['quiz' => $quiz->id]) }}">{{ $quiz->title }}</a>
+                    </li>
+                @endcan
+            @endforeach
+        </ul>
     </table>
     @auth
         <a href="{{ route('books.quizzes.create', ['book' => $book->id]) }}">new quiz</a>

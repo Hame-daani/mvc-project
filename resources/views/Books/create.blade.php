@@ -29,7 +29,7 @@
         <input type="url" name="img" id="img">
         <br>
         <br>
-        <input type="submit" value="update">
+        <input type="submit" value="create">
     </form>
 </body>
 
