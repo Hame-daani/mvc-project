@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\OptionController;
 
@@ -22,13 +23,18 @@ Route::get('/', function () {
     return view('index');
 });
 
+
 Route::resource('books', BookController::class);
+Route::post('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
+Route::post('users/{user}/admin', [UserController::class, 'admin'])->name('users.admin');
+Route::resource('users', UserController::class);
 Route::get('quizzes', [QuizController::class, 'index'])->name('quizzes.index');
 Route::post('quizzes/{quiz}/toggle', [QuizController::class, 'toggle'])->name('quizzes.toggle');
 Route::post('quizzes/{quiz}/attempt', [QuizController::class, 'attempt'])->name('quizzes.attempt');
 Route::resource('books.quizzes', QuizController::class)->shallow();
 Route::resource('quizzes.questions', QuestionController::class)->shallow()->only(['store', 'update', 'destroy']);
 Route::resource('questions.options', OptionController::class)->shallow()->only(['store', 'destroy']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

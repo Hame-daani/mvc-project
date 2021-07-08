@@ -27,6 +27,8 @@
     @endguest
     @can('admin')
         <a href="{{ route('quizzes.index') }}">quizzes</a>
+        <br>
+        <a href="{{ route('users.index') }}">users</a>
     @endcan
     <br>
     <a href="{{ route('books.index') }}">books</a>
