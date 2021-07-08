@@ -30,12 +30,16 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        //
+        //authorize
+        return view('users.edit')->with(['user' => $user]);
     }
 
     public function update(Request $request, User $user)
     {
-        //
+        // $this->authorize('admin');
+        $input = collect(request()->all())->filter()->all();
+        $user->update($input);
+        return back();
     }
 
     public function toggle(User $user)

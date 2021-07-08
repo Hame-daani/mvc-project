@@ -11,6 +11,7 @@
 
 <body class="antialiased">
     <h1>{{ $user->name }}</h1>
+    <a href="{{ route('users.edit', ['user' => $user->id]) }}">Edit my info:</a>
     <h2>Quizzes</h2>
     <table>
         <ul>
