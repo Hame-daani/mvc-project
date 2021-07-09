@@ -45,7 +45,6 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->load('quizzes');
-        //TODO: only 10 quiz??
         return view('books.show')->with(['book' => $book]);
     }
 

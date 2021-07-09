@@ -73,11 +73,12 @@ class QuizController extends Controller
     public function destroy(Request $request, Quiz $quiz)
     {
         $this->authorize('delete', $quiz);
+        $book = $quiz->book;
         $quiz->delete();
         if ($request->header('referer') == route('quizzes.index'))
             return back();
         else
-            return redirect('/'); //TODO: return to book page
+            return redirect()->route('books.show', $book->id);
     }
 
     public function attempt(Quiz $quiz, Request $request)
