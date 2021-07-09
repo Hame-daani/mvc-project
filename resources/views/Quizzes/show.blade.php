@@ -17,9 +17,9 @@
     @if (!$quiz->is_active)
         <p style="color: red">this quiz is deactive!</p>
     @endif
-    @if ($answers)
+    @cannot('attempt', $quiz)
         <p style="color: red">you have attempted this before!</p>
-    @endif
+    @endcannot
     <h2>Questions</h2>
     <form action="{{ route('quizzes.attempt', ['quiz' => $quiz->id]) }}" method="post">
         @csrf
@@ -33,8 +33,9 @@
             @endforeach
         @endforeach
         <br>
-
-        <input type="submit" value="attempt">
+        @can('attempt', $quiz)
+            <input type="submit" value="attempt">
+        @endcan
     </form>
 </body>
 

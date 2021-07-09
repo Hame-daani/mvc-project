@@ -7,6 +7,7 @@ use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Auth\Access\Response;
 
 class AuthServiceProvider extends ServiceProvider
@@ -34,6 +35,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin
                 ? Response::allow()
                 : Response::deny('You must be an administrator.');
+        });
+
+        Gate::define('attempt', function (User $user, Quiz $quiz) {
+            if (!$quiz->is_active or $user->attempts($quiz)->exists())
+                return Response::deny('You can not attempt this quiz!');
+            return Response::allow();
         });
     }
 }

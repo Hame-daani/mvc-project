@@ -44,10 +44,11 @@ class QuizController extends Controller
     {
         $this->authorize('view', $quiz);
         $quiz->load('questions.options');
-        if ($quiz->attempts(Auth::id())->exists()) {
+        $attempt = $quiz->attempts(Auth::id())->first();
+        if ($attempt) {
             $answers = $quiz->answers(Auth::id())->pluck('option_id')->toArray();
         }
-        return view('quizzes.show')->with(['quiz' => $quiz, 'answers' => $answers ? $answers : null]);
+        return view('quizzes.show')->with(['quiz' => $quiz, 'answers' => $attempt ? $answers : null]);
     }
 
     public function edit(Quiz $quiz)
@@ -81,7 +82,7 @@ class QuizController extends Controller
 
     public function attempt(Quiz $quiz, Request $request)
     {
-        //TODO: authorize attempt
+        $this->authorize('attempt', $quiz);
         $input = $request->input('answers');
         $user = Auth::user();
         $score = 0;
