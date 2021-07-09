@@ -28,6 +28,10 @@ class Quiz extends Model
     {
         return $this->hasMany(Question::class);
     }
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
     public function attempts()
     {
         return $this->belongsToMany(User::class, 'attempts')->as('attempts')->withPivot('score')->withTimestamps();
