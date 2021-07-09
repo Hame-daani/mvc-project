@@ -96,7 +96,6 @@ class QuizController extends Controller
                 $score += 10;
         }
         $quiz->attempts()->attach($user->id, ['score' => $score]);
-        $user->scores += $score;
         return back();
     }
 

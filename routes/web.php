@@ -25,6 +25,7 @@ Route::get('/', function () {
 
 
 Route::resource('books', BookController::class);
+Route::get('users/tops', [UserController::class, 'topusers'])->name('users.tops');
 Route::post('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
 Route::post('users/{user}/admin', [UserController::class, 'admin'])->name('users.admin');
 Route::resource('users', UserController::class)->only(['index', 'show', 'edit', 'update']);

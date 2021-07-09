@@ -34,6 +34,8 @@
     @endcan
     <br>
     <a href="{{ route('books.index') }}">books</a>
+    <br>
+    <a href="{{ route('users.tops') }}">Top Users</a>
 </body>
 
 </html>

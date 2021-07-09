@@ -49,11 +49,18 @@ class UserController extends Controller
         $user->save();
         return back();
     }
+
     public function admin(User $user)
     {
         $this->authorize('update', $user);
         $user->is_admin = !$user->is_admin;
         $user->save();
         return back();
+    }
+
+    public function topusers()
+    {
+        $users = User::all()->sortByDesc('scores')->values()->take(10);
+        return view('users.tops')->with(['users' => $users]);
     }
 }
