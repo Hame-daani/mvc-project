@@ -13,7 +13,7 @@ class UserPolicy
     public function before(User $user, $ability)
     {
         if ($user->is_admin) {
-            return true;
+            return Response::allow();
         }
     }
 
