@@ -14,8 +14,8 @@ class CreateAttemptsTable extends Migration
     public function up()
     {
         Schema::create('attempts', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('quiz_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
             $table->primary(['user_id', 'quiz_id']);
             $table->integer('score')->default(0);
             $table->timestamps();
