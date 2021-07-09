@@ -37,7 +37,7 @@ class QuizController extends Controller
             'title' => $request->title,
             'user_id' => Auth::id(),
         ]);
-        return $this->edit($quiz);
+        return redirect()->route('quizzes.edit', ['quiz' => $quiz]);
     }
 
 
@@ -67,11 +67,14 @@ class QuizController extends Controller
         return back();
     }
 
-    public function destroy(Quiz $quiz)
+    public function destroy(Request $request, Quiz $quiz)
     {
         $this->authorize('delete', $quiz);
         $quiz->delete();
-        return back(); //TODO: dont go back!
+        if ($request->header('referer') == route('quizzes.index'))
+            return back();
+        else
+            return redirect('/');
     }
 
     public function attempt(Quiz $quiz, Request $request)
