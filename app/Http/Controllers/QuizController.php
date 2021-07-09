@@ -45,7 +45,10 @@ class QuizController extends Controller
     {
         $this->authorize('view', $quiz);
         $quiz->load('questions.options');
-        return view('quizzes.show')->with(['quiz' => $quiz]);
+        if ($quiz->attempts(Auth::id())->exists()) {
+            $answers = $quiz->answers(Auth::id())->pluck('option_id')->toArray();
+        }
+        return view('quizzes.show')->with(['quiz' => $quiz, 'answers' => $answers ? $answers : null]);
     }
 
     public function edit(Quiz $quiz)
@@ -79,18 +82,23 @@ class QuizController extends Controller
 
     public function attempt(Quiz $quiz, Request $request)
     {
-        // save answers
-        $answers = $request->except('_token');
-        foreach ($answers as $q => $o) {
-            Answer::create([
-                'user_id' => Auth::id(),
-                'question_id' => $q,
+        $input = $request->except('_token');
+        //TODO: get only option ids
+        $user_id = Auth::id();
+        $answers = [];
+        $score = 0;
+        foreach ($input as $q => $o) {
+            $answer = Answer::create([
+                'user_id' => $user_id,
+                'quiz_id' => $quiz->id,
                 'option_id' => $o,
             ]);
+            $answers[] = $answer;
+            if ($answer->option->is_right)
+                $score += 10;
         }
-        //TODO: count score
-        //TODO: save attempt
-        return $request->except('_token');
+        $quiz->attempts()->attach($user_id, ['score' => $score]);
+        return back();
     }
     public function toggle(Quiz $quiz)
     {

@@ -17,18 +17,24 @@
     @if (!$quiz->is_active)
         <p style="color: red">this quiz is deactive!</p>
     @endif
+    @if ($answers)
+        <p style="color: red">you have attempted this before!</p>
+    @endif
     <h2>Questions</h2>
     <form action="{{ route('quizzes.attempt', ['quiz' => $quiz->id]) }}" method="post">
         @csrf
         @foreach ($quiz->questions as $question)
             <h3>{{ $question->text }}</h3>
             @foreach ($question->options as $option)
+                <!-- TODO: mark the answers -->
                 <input type="radio" name="{{ $question->id }}" id="{{ $option->id }}" value="{{ $option->id }}">
                 <label for="{{ $option->id }}">{{ $option->text }}</label>
             @endforeach
         @endforeach
         <br>
-        <input type="submit" value="attempt">
+        @if (!$answers)
+            <input type="submit" value="attempt">
+        @endif
     </form>
 </body>
 
