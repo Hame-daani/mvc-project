@@ -27,14 +27,14 @@
             <h3>{{ $question->text }}</h3>
             @foreach ($question->options as $option)
                 <!-- TODO: mark the answers -->
-                <input type="radio" name="{{ $question->id }}" id="{{ $option->id }}" value="{{ $option->id }}">
+                <input type="radio" name="answers[{{ $question->id }}]" id="option{{ $option->id }}"
+                    value="{{ $option->id }}">
                 <label for="{{ $option->id }}">{{ $option->text }}</label>
             @endforeach
         @endforeach
         <br>
-        @if (!$answers)
-            <input type="submit" value="attempt">
-        @endif
+
+        <input type="submit" value="attempt">
     </form>
 </body>
 

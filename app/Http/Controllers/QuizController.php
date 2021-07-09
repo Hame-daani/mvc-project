@@ -40,7 +40,6 @@ class QuizController extends Controller
         return redirect()->route('quizzes.edit', ['quiz' => $quiz]);
     }
 
-
     public function show(Quiz $quiz)
     {
         $this->authorize('view', $quiz);
@@ -77,29 +76,29 @@ class QuizController extends Controller
         if ($request->header('referer') == route('quizzes.index'))
             return back();
         else
-            return redirect('/');
+            return redirect('/'); //TODO: return to book page
     }
 
     public function attempt(Quiz $quiz, Request $request)
     {
-        $input = $request->except('_token');
-        //TODO: get only option ids
-        $user_id = Auth::id();
-        $answers = [];
+        //TODO: authorize attempt
+        $input = $request->input('answers');
+        $user = Auth::user();
         $score = 0;
         foreach ($input as $q => $o) {
             $answer = Answer::create([
-                'user_id' => $user_id,
+                'user_id' => $user->id,
                 'quiz_id' => $quiz->id,
                 'option_id' => $o,
             ]);
-            $answers[] = $answer;
             if ($answer->option->is_right)
                 $score += 10;
         }
-        $quiz->attempts()->attach($user_id, ['score' => $score]);
+        $quiz->attempts()->attach($user->id, ['score' => $score]);
+        $user->scores += $score;
         return back();
     }
+
     public function toggle(Quiz $quiz)
     {
         $this->authorize('admin');
