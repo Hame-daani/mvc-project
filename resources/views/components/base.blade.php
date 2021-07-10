@@ -20,8 +20,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
-<body>
-    <div>
+<body class="d-flex flex-column h-100">
+    <div class="container">
         <header class="d-flex justify-content-center py-3">
             <ul class="nav nav-pills">
                 <li class="nav-item">
@@ -73,12 +73,26 @@
             </ul>
         </header>
         <hr>
-        <main>
-            {{ $slot }}
+        <main class="flex-shrink-0">
+            <div class="container">
+                {{ $slot }}
+            </div>
         </main>
         <hr>
-        <footer>
-            this is footer
+        <footer class="bg-light text-center text-lg-start">
+            <div class="container p-4 pb-0">
+                <section class="">
+                    <p class="d-flex justify-content-center align-items-center">
+                        <span class="me-3">This project was possible because of Gutenberg Project.</span>
+                    </p>
+                </section>
+            </div>
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2021 Copyright:
+                <a class="text-dark" href="https://www.gutenberg.org/">Gutenberg Project</a>
+            </div>
+            <!-- Copyright -->
         </footer>
     </div>
 </body>
