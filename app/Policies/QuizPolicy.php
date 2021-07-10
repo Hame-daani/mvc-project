@@ -40,4 +40,10 @@ class QuizPolicy
             ? Response::allow()
             : Response::deny('You do not own this quiz.');
     }
+    public function attempt(User $user, Quiz $quiz)
+    {
+        if ($user->attempts()->where('quiz_id', $quiz->id)->exists())
+            return Response::deny('You can not attempt this quiz!');
+        return Response::allow();
+    }
 }
