@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
-
-</head>
-
-<body class="antialiased">
+<x-base>
     <h1>{{ $user->name }}</h1>
     <p>your score is {{ $user->scores }}</p>
     <a href="{{ route('users.edit', ['user' => $user->id]) }}">Edit my info:</a>
@@ -27,6 +16,4 @@
             @endforeach
         </ul>
     </table>
-</body>
-
-</html>
+</x-base>

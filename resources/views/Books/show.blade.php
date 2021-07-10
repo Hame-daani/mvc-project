@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
-
-</head>
-
-<body class="antialiased">
+<x-base>
     <h1>{{ $book->title }}</h1>
     <p>{{ $book->info }}</p>
     <img src="{{ $book->img }}" alt="">
@@ -33,6 +22,4 @@
     @auth
         <a href="{{ route('books.quizzes.create', ['book' => $book->id]) }}">new quiz</a>
     @endauth
-</body>
-
-</html>
+</x-base>
