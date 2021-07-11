@@ -36,38 +36,28 @@
                                     @if ($answers) {{-- attempted --}}
                                         @if (in_array($option->id, $answers))
                                             {{-- chosen --}}
+                                            <input type="radio" class="btn-check" name="answers[{{ $question->id }}]"
+                                                id="option{{ $option->id }}" value="{{ $option->id }}" disabled
+                                                checked>
                                             @if ($option->is_right)
                                                 {{-- user is right --}}
-                                                <input type="radio" class="btn-check"
-                                                    name="answers[{{ $question->id }}]" id="option{{ $option->id }}"
-                                                    value="{{ $option->id }}" disabled checked>
                                                 <label class="btn btn-outline-success" for="option{{ $option->id }}">
                                                     {{ $option->text }}
                                                 </label>
                                                 @else{{-- user is wrong --}}
-                                                <input type="radio" class="btn-check"
-                                                    name="answers[{{ $question->id }}]"
-                                                    id="option{{ $option->id }}" value="{{ $option->id }}"
-                                                    disabled checked>
                                                 <label class="btn btn-outline-danger" for="option{{ $option->id }}">
                                                     {{ $option->text }}
                                                 </label>
                                             @endif
                                             @else{{-- not chosen --}}
+                                            <input type="radio" class="btn-check" name="answers[{{ $question->id }}]"
+                                                id="option{{ $option->id }}" value="{{ $option->id }}" disabled>
                                             @if ($option->is_right)
                                                 {{-- correct answer --}}
-                                                <input type="radio" class="btn-check"
-                                                    name="answers[{{ $question->id }}]"
-                                                    id="option{{ $option->id }}" value="{{ $option->id }}"
-                                                    disabled>
                                                 <label class="btn btn-outline-success" for="option{{ $option->id }}">
                                                     {{ $option->text }}
                                                 </label>
                                                 @else{{-- others --}}
-                                                <input type="radio" class="btn-check"
-                                                    name="answers[{{ $question->id }}]"
-                                                    id="option{{ $option->id }}" value="{{ $option->id }}"
-                                                    disabled>
                                                 <label class="btn btn-outline-primary" for="option{{ $option->id }}">
                                                     {{ $option->text }}
                                                 </label>
