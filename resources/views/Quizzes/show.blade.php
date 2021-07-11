@@ -1,29 +1,95 @@
 <x-base>
-    <h1>{{ $quiz->title }}</h1>
-    @can('update', $quiz)
-        <a href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">Edit this quiz</a>
-    @endcan
-    @if (!$quiz->is_active)
-        <p style="color: red">this quiz is deactive!</p>
-    @endif
-    @cannot('attempt', $quiz)
-        <p style="color: red">you have attempted this before!</p>
-    @endcannot
-    <h2>Questions</h2>
-    <form action="{{ route('quizzes.attempt', ['quiz' => $quiz->id]) }}" method="post">
-        @csrf
-        @foreach ($quiz->questions as $question)
-            <h3>{{ $question->text }}</h3>
-            @foreach ($question->options as $option)
-                <!-- TODO: mark the answers -->
-                <input type="radio" name="answers[{{ $question->id }}]" id="option{{ $option->id }}"
-                    value="{{ $option->id }}">
-                <label for="{{ $option->id }}">{{ $option->text }}</label>
-            @endforeach
-        @endforeach
-        <br>
-        @can('attempt', $quiz)
-            <input type="submit" value="attempt">
-        @endcan
-    </form>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">
+                    {{ $quiz->title }}
+                </h1>
+                @unless($quiz->is_active)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        This Quiz is Deactive!
+                    </div>
+                @endunless
+                @cannot('attempt', $quiz)
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        You already attempted this quiz!
+                    </div>
+                @endcannot
+                <a class="btn btn-secondary" href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">Edit this
+                    quiz</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="row g-0 justify-content-center">
+                <div class="col-md-5">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Questions
+                        </h4>
+                        <form action="{{ route('quizzes.attempt', ['quiz' => $quiz->id]) }}" method="post">
+                            @csrf
+                            @foreach ($quiz->questions as $question)
+                                <p class="lead">
+                                    {{ $question->text }}
+                                </p>
+                                @foreach ($question->options as $option)
+                                    @if ($answers) {{-- attempted --}}
+                                        @if (in_array($option->id, $answers))
+                                            {{-- chosen --}}
+                                            @if ($option->is_right)
+                                                {{-- user is right --}}
+                                                <input type="radio" class="btn-check"
+                                                    name="answers[{{ $question->id }}]" id="option{{ $option->id }}"
+                                                    value="{{ $option->id }}" disabled checked>
+                                                <label class="btn btn-outline-success" for="option{{ $option->id }}">
+                                                    {{ $option->text }}
+                                                </label>
+                                                @else{{-- user is wrong --}}
+                                                <input type="radio" class="btn-check"
+                                                    name="answers[{{ $question->id }}]"
+                                                    id="option{{ $option->id }}" value="{{ $option->id }}"
+                                                    disabled checked>
+                                                <label class="btn btn-outline-danger" for="option{{ $option->id }}">
+                                                    {{ $option->text }}
+                                                </label>
+                                            @endif
+                                            @else{{-- not chosen --}}
+                                            @if ($option->is_right)
+                                                {{-- correct answer --}}
+                                                <input type="radio" class="btn-check"
+                                                    name="answers[{{ $question->id }}]"
+                                                    id="option{{ $option->id }}" value="{{ $option->id }}"
+                                                    disabled>
+                                                <label class="btn btn-outline-success" for="option{{ $option->id }}">
+                                                    {{ $option->text }}
+                                                </label>
+                                                @else{{-- others --}}
+                                                <input type="radio" class="btn-check"
+                                                    name="answers[{{ $question->id }}]"
+                                                    id="option{{ $option->id }}" value="{{ $option->id }}"
+                                                    disabled>
+                                                <label class="btn btn-outline-primary" for="option{{ $option->id }}">
+                                                    {{ $option->text }}
+                                                </label>
+                                            @endif
+                                        @endif
+                                        @else{{-- not attempted --}}
+                                        <input type="radio" class="btn-check" name="answers[{{ $question->id }}]"
+                                            id="option{{ $option->id }}" value="{{ $option->id }}">
+                                        <label class="btn btn-outline-primary" for="option{{ $option->id }}">
+                                            {{ $option->text }}
+                                        </label>
+                                    @endif
+                                @endforeach
+                                <br>
+                                <br>
+                            @endforeach
+                            <input class="btn btn-primary" type="submit" value="attempt" @cannot('attempt', $quiz)
+                                disabled @endcannot>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-base>
