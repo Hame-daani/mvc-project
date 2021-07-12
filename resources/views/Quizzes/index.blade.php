@@ -1,23 +1,33 @@
 <x-base>
-    @foreach ($quizzes as $quiz)
-        <ul>
-            <li><a href="{{ route('quizzes.show', $quiz->id) }}">{{ $quiz->title }}</a></td>
-                @if ($quiz->is_active)
-                    &#9989;
-                @else
-                    &#10060;
-                @endif
-
-                <form action="{{ route('quizzes.destroy', ['quiz' => $quiz->id]) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" name="delete" value="Delete"
-                        onclick="return confirm('are you sure you want to delte this quiz?');">
-                </form>
-                <form action="{{ route('quizzes.toggle', ['quiz' => $quiz->id]) }}" method="post">
-                    @csrf
-                    <input type="submit" name="toggle" value="{{ $quiz->is_active ? 'deactive' : 'activate' }}">
-                </form>
+    <div class="row g-0 justify-content-center">
+        <ul class="list-group col-md-8">
+            @foreach ($quizzes as $quiz)
+                <li
+                    class="list-group-item justify-content-between d-flex @unless($quiz->is_active) list-group-item-danger @endunless">
+                    <div>
+                        <a href="{{ route('quizzes.show', $quiz->id) }}">
+                            {{ $quiz->title }}
+                        </a>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 col-md-5">
+                            <form action="{{ route('quizzes.destroy', ['quiz' => $quiz->id]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-danger" name="delete" value="Delete"
+                                    onclick="return confirm('are you sure you want to delte this quiz?');">
+                            </form>
+                        </div>
+                        <div class="col-5 col-md-6">
+                            <form action="{{ route('quizzes.toggle', ['quiz' => $quiz->id]) }}" method="post">
+                                @csrf
+                                <input type="submit" class="btn @if ($quiz->is_active) btn-danger @else btn-success @endif" name="toggle"
+                                value="{{ $quiz->is_active ? 'deactive' : 'activate' }}">
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            @endforeach
         </ul>
-    @endforeach
+    </div>
 </x-base>
