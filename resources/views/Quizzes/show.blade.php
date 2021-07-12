@@ -12,7 +12,8 @@
                 @endunless
                 @cannot('attempt', $quiz)
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        You already attempted this quiz!
+                        You already attempted this quiz! Your score was:
+                        {{ $quiz->attempts()->where('user_id', Auth::id())->first()->pivot->score }}
                     </div>
                 @endcannot
                 <a class="btn btn-secondary" href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">Edit this
@@ -36,9 +37,8 @@
                                     @if ($answers) {{-- attempted --}}
                                         @if (in_array($option->id, $answers))
                                             {{-- chosen --}}
-                                            <input type="radio" class="btn-check" name="answers[{{ $question->id }}]"
-                                                id="option{{ $option->id }}" value="{{ $option->id }}" disabled
-                                                checked>
+                                            <input type="radio" class="btn-check" name="" id="option{{ $option->id }}"
+                                                value="{{ $option->id }}" disabled checked>
                                             @if ($option->is_right)
                                                 {{-- user is right --}}
                                                 <label class="btn btn-outline-success" for="option{{ $option->id }}">
@@ -50,14 +50,18 @@
                                                 </label>
                                             @endif
                                             @else{{-- not chosen --}}
-                                            <input type="radio" class="btn-check" name="answers[{{ $question->id }}]"
-                                                id="option{{ $option->id }}" value="{{ $option->id }}" disabled>
                                             @if ($option->is_right)
                                                 {{-- correct answer --}}
+                                                <input type="radio" class="btn-check" name=""
+                                                    id="option{{ $option->id }}" value="{{ $option->id }}"
+                                                    disabled checked>
                                                 <label class="btn btn-outline-success" for="option{{ $option->id }}">
                                                     {{ $option->text }}
                                                 </label>
                                                 @else{{-- others --}}
+                                                <input type="radio" class="btn-check" name=""
+                                                    id="option{{ $option->id }}" value="{{ $option->id }}"
+                                                    disabled>
                                                 <label class="btn btn-outline-primary" for="option{{ $option->id }}">
                                                     {{ $option->text }}
                                                 </label>
