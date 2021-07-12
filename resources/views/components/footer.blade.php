@@ -2,7 +2,7 @@
     <div class="container p-4 pb-0">
         <section class="">
             <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3">All books on this site are provided using Gutenberg Project</span>
+                <span class="me-3">تمامی کتاب‌ها در این سایت از طریق پروژه گوتنبرگ تهیه شده است.</span>
             </p>
         </section>
     </div>
