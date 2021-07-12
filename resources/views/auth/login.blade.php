@@ -19,10 +19,21 @@
                         @csrf
                         <h4>Welcome</h4>
                         <!-- Session Status -->
-                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        @if (session('status'))
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
                         <!-- Validation Errors -->
-                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        @if (count($errors) != 0)
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ $error }}
+                                </div>
+                            @endforeach
+                        @endif
+
                         <div class="col-12">
                             <label>Email</label>
                             <input type="text" name="email" class="form-control" placeholder="Email">
