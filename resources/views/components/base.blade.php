@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 
 <head>
     <meta charset="utf-8">
@@ -22,56 +22,7 @@
 
 <body class="d-flex flex-column h-100">
     <div class="container">
-        <header class="d-flex justify-content-center py-3">
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a href="{{ url('/') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}"
-                        aria-current="page">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('books.index') }}"
-                        class="nav-link {{ Route::is('books.index') ? 'active' : '' }}">Books</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('users.tops') }}"
-                        class="nav-link {{ Route::is('users.tops') ? 'active' : '' }}">Top Users</a>
-                </li>
-                @guest
-                    <li class="nav-item">
-                        <a href="{{ route('register') }}"
-                            class="nav-link {{ Route::is('register') ? 'active' : '' }}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('login') }}"
-                            class="nav-link {{ Route::is('login') ? 'active' : '' }}">Login</a>
-                    </li>
-                @endguest
-                @can('admin')
-                    <li class="nav-item">
-                        <a href="{{ route('quizzes.index') }}"
-                            class="nav-link {{ Route::is('quizzes.index') ? 'active' : '' }}">Quizzes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('users.index') }}"
-                            class="nav-link {{ Route::is('users.index') ? 'active' : '' }}">Users</a>
-                    </li>
-                @endcan
-                @auth
-                    <li class="nav-item">
-                        <a href="{{ route('users.show', ['user' => Auth::id()]) }}"
-                            class="nav-link {{ Route::is('users.show') ? 'active' : '' }}">My Profile</a>
-                    </li>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <li class="nav-item">
-                            <button type="submit" class="nav-link {{ Route::is('logout') ? 'active' : '' }}">
-                                Log out
-                            </button>
-                        </li>
-                    </form>
-                @endauth
-            </ul>
-        </header>
+        @include('components.header')
         <hr>
         <main class="flex-shrink-0">
             <div class="container">
@@ -79,21 +30,7 @@
             </div>
         </main>
         <hr>
-        <footer class="bg-light text-center text-lg-start">
-            <div class="container p-4 pb-0">
-                <section class="">
-                    <p class="d-flex justify-content-center align-items-center">
-                        <span class="me-3">All books on this site are provided using Gutenberg Project</span>
-                    </p>
-                </section>
-            </div>
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2021 Copyright:
-                <a class="text-dark" href="https://www.gutenberg.org/">Gutenberg Project</a>
-            </div>
-            <!-- Copyright -->
-        </footer>
+        @include('components.footer')
     </div>
 </body>
 
