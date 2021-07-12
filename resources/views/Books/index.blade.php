@@ -1,11 +1,13 @@
 <x-base>
-    @foreach ($books as $book)
-        <u class="list-group">
+    <ul class="list-group">
+        @foreach ($books as $book)
             <li class="list-group-item list-group-item-action"><a
-                    href="{{ route('books.show', $book->id) }}">{{ $book->title }}</a></td>
-                </ul>
-    @endforeach
+                    href="{{ route('books.show', $book->id) }}">{{ $book->title }}</a>
+            </li>
+        @endforeach
+    </ul>
+    <br>
     @can('admin')
-        <a href="{{ route('books.create') }}">new book</a>
+        <a class="btn btn-primary" href="{{ route('books.create') }}">new book</a>
     @endcan
 </x-base>
