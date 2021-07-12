@@ -34,6 +34,6 @@ class Quiz extends Model
     }
     public function attempts()
     {
-        return $this->belongsToMany(User::class, 'attempts')->as('attempts')->withPivot('score')->withTimestamps();
+        return $this->belongsToMany(User::class, 'attempts')->withPivot('score')->withTimestamps();
     }
 }

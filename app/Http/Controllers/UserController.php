@@ -22,9 +22,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $this->authorize('view', $user);
-        //TODO my attemps maybe?
-        $user->load('quizzes');
-        //$user->load('attempts');
+        $user->load(['quizzes', 'attempts']);
         return view('Users.show')->with(['user' => $user]);
     }
 
