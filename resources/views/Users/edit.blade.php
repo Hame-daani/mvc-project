@@ -1,15 +1,28 @@
 <x-base>
-    <h1>edit my info</h1>
-    <br>
-    <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST">
-        @method('PUT')
-        @csrf
-        <label for="name">name:</label>
-        <input type="text" name="name" id="name" placeholder="{{ $user->name }}">
-        <br>
-        <br>
-        <label for="email">email:</label>
-        <input type="text" name="email" id="email" placeholder="{{ $user->email }}">
-        <input type="submit" value="update">
-    </form>
+    <div class="container">
+        <div class="card">
+            <div class="row g-0 justify-content-center">
+                <div class="col-md-5">
+                    <div class="card-body">
+                        <h1 class="card-title">Edit {{ $user->name }} Info</h1>
+                        <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST">
+                            @method('PUT')
+                            @csrf
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="{{ $user->name }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="{{ $user->email }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-base>
