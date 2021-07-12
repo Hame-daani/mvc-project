@@ -9,19 +9,20 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="title" class="form-label">Title</label>
-                                <input type="text" class="form-control" name="title" id="title">
+                                <input type="text" class="form-control" name="title" id="title" required>
                             </div>
                             <div class="mb-3">
                                 <label for="info" class="form-label">Info</label>
-                                <textarea class="form-control" name="info" id="id" cols="100" rows="5"></textarea>
+                                <textarea class="form-control" name="info" id="id" cols="100" rows="5"
+                                    required></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="link" class="form-label">Link</label>
-                                <input type="url" class="form-control" name="link" id="link">
+                                <input type="url" class="form-control" name="link" id="link" required>
                             </div>
                             <div class="mb-3">
                                 <label for="img" class="form-label">Image Link</label>
-                                <input type="url" class="form-control" name="img" id="img">
+                                <input type="url" class="form-control" name="img" id="img" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Create</button>
                         </form>
