@@ -46,7 +46,7 @@ class QuizController extends Controller
         $quiz->load('questions.options');
         $attempt = $quiz->attempts(Auth::id())->first();
         if ($attempt) {
-            $answers = $quiz->answers(Auth::id())->pluck('option_id')->toArray();
+            $answers = $quiz->answers()->where('user_id', Auth::id())->pluck('option_id')->toArray();
         }
         return view('quizzes.show')->with(['quiz' => $quiz, 'answers' => $attempt ? $answers : null]);
     }
