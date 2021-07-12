@@ -10,19 +10,19 @@
                         </a>
                     </div>
                     <div class="row">
-                        <div class="col-3 col-md-5">
+                        <div class="col-3 col-md-6">
                             <form action="{{ route('quizzes.destroy', ['quiz' => $quiz->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" class="btn btn-danger" name="delete" value="Delete"
+                                <input type="submit" class="btn btn-danger" name="delete" value="حذف این کوییز"
                                     onclick="return confirm('are you sure you want to delte this quiz?');">
                             </form>
                         </div>
-                        <div class="col-5 col-md-6">
+                        <div class="col-3 col-md-6">
                             <form action="{{ route('quizzes.toggle', ['quiz' => $quiz->id]) }}" method="post">
                                 @csrf
                                 <input type="submit" class="btn @if ($quiz->is_active) btn-danger @else btn-success @endif" name="toggle"
-                                value="{{ $quiz->is_active ? 'deactive' : 'activate' }}">
+                                value="{{ $quiz->is_active ? 'غیرفعال کردن' : 'فعال کردن' }}">
                             </form>
                         </div>
                     </div>

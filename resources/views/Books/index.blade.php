@@ -8,6 +8,6 @@
     </ul>
     <br>
     @can('admin')
-        <a class="btn btn-primary" href="{{ route('books.create') }}">new book</a>
+        <a class="btn btn-primary" href="{{ route('books.create') }}">ایجاد کتاب جدید</a>
     @endcan
 </x-base>

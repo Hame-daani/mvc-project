@@ -3,7 +3,7 @@
         <div class="row g-0 justify-content-center">
             <div class="col-md-8">
                 <div class="card-body row g-0  justify-content-center">
-                    <h2 class="card-title">Top Users</h2>
+                    <h2 class="card-title">ده کاربر برتر در سایت</h2>
                     <div class="col-md-7">
                         </ol>
                         <ol class="list-group list-group-numbered">

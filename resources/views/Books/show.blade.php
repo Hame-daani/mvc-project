@@ -8,12 +8,12 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ $book->title }}</h2>
                     <p class="card-text">{{ $book->info }}</p>
-                    <p class="card-text"><small class="text-muted">Last updated at {{ $book->updated_at }}</small></p>
-                    <a href="{{ $book->link }}" class="btn btn-primary" role="button">Read</a>
+                    <p class="card-text"><small class="text-muted">آخرین بار در تاریخ {{ $book->updated_at }} آپدیت
+                            شده است</small></p>
+                    <a href="{{ $book->link }}" class="btn btn-primary" role="button">خواندن کتاب</a>
                     @can('admin')
                         <a href="{{ route('books.edit', ['book' => $book->id]) }}" class="btn btn-secondary"
-                            role="button">Edit this
-                            book</a>
+                            role="button">ویرایش کتاب</a>
                     @endcan
                 </div>
             </div>
@@ -23,11 +23,11 @@
         <div class="row g-0 justify-content-center">
             <div class="col-md-8">
                 <div class="card-body">
-                    <h4 class="card-title">Quizzes</h5>
+                    <h4 class="card-title">کوییزها</h5>
                         <p class="card-text">
                             @if (count($book->quizzes) == 0)
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    No Quiz available.
+                                    هیچ کوییزی موجود نیست
                                 </div>
                             @else
                                 <ul class="list-group">
@@ -38,7 +38,7 @@
                                                 <a
                                                     href="{{ route('quizzes.show', ['quiz' => $quiz->id]) }}">{{ $quiz->title }}</a>
                                                 <div>
-                                                    Number of Attempts:
+                                                    تعداد تلاش‌های ثبت شده
                                                     <span
                                                         class="badge bg-primary rounded-pill">{{ $quiz->attempts->count() }}</span>
                                                 </div>
@@ -50,7 +50,7 @@
                         </p>
                         @auth
                             <a href="{{ route('books.quizzes.create', ['book' => $book->id]) }}" class="btn btn-primary"
-                                role="button">New Quiz</a>
+                                role="button">ایجاد کوییز جدید</a>
                         @endauth
                 </div>
             </div>

@@ -7,17 +7,17 @@
                 </h1>
                 @unless($quiz->is_active)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        This Quiz is Deactive!
+                        این کوییز غیرفعال است!
                     </div>
                 @endunless
                 @cannot('attempt', $quiz)
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        You already attempted this quiz! Your score was:
+                        شما قبلا در این کوییز شرکت کردید. امتیاز شما:
                         {{ $quiz->attempts()->where('user_id', Auth::id())->first()->pivot->score }}
                     </div>
                 @endcannot
-                <a class="btn btn-secondary" href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">Edit this
-                    quiz</a>
+                <a class="btn btn-secondary" href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">ویرایش این
+                    کوییز</a>
             </div>
         </div>
         <div class="card">
@@ -25,7 +25,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h4 class="card-title">
-                            Questions
+                            سوالات
                         </h4>
                         <form action="{{ route('quizzes.attempt', ['quiz' => $quiz->id]) }}" method="post">
                             @csrf
@@ -78,8 +78,8 @@
                                 <br>
                                 <br>
                             @endforeach
-                            <input class="btn btn-primary" type="submit" value="attempt" @cannot('attempt', $quiz)
-                                disabled @endcannot>
+                            <input class="btn btn-primary" type="submit" value="ثبت" @cannot('attempt', $quiz) disabled
+                                @endcannot>
                         </form>
                     </div>
                 </div>

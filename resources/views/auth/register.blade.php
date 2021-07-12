@@ -8,6 +8,15 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{-- font --}}
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v29.1.0/dist/font-face.css" rel="stylesheet"
+        type="text/css" />
+    <style>
+        * {
+            font-family: 'Vazir', sans-serif;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -17,7 +26,7 @@
                 <div class="login-form bg-light mt-4 p-4">
                     <form action="{{ route('register') }}" method="POST" class="row g-3">
                         @csrf
-                        <h4>Join us</h4>
+                        <h4>به ما اضافه بشید</h4>
                         <!-- Session Status -->
                         @if (session('status'))
                             <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -35,29 +44,28 @@
                         @endif
 
                         <div class="col-12">
-                            <label>Name</label>
+                            <label>اسم</label>
                             <input type="text" name="name" class="form-control" placeholder="Name" required autofocus>
                         </div>
                         <div class="col-12">
-                            <label>Email</label>
+                            <label>ایمیل</label>
                             <input type="email" name="email" class="form-control" placeholder="Email" required>
                         </div>
                         <div class="col-12">
-                            <label>Password</label>
+                            <label>پسورد</label>
                             <input type="password" name="password" class="form-control" placeholder="Password" required
                                 autocomplete="new-password">
                         </div>
                         <div class="col-12">
-                            <label>Password</label>
+                            <label>تکرار پسورد</label>
                             <input type="password" name="password_confirmation" class="form-control"
                                 placeholder="password confirmation" required>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-dark float-end">Register</button>
+                            <button type="submit" class="btn btn-dark float-end">ثبت نام</button>
                         </div>
                     </form>
                     <hr class="mt-4">
-
                 </div>
             </div>
         </div>

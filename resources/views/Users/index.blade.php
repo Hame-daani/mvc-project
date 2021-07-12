@@ -18,14 +18,14 @@
                             <form action="{{ route('users.toggle', ['user' => $user->id]) }}" method="post">
                                 @csrf
                                 <input type="submit" class="btn @if ($user->is_active) btn-danger @else btn-success @endif" name="toggle"
-                                value="{{ $user->is_active ? 'deactive' : 'activate' }}">
+                                value="{{ $user->is_active ? 'آنبلاک کاربر' : 'بلاک کاربر' }}">
                             </form>
                         </div>
                         <div class="col-5 col-md-6">
                             <form action="{{ route('users.admin', ['user' => $user->id]) }}" method="post">
                                 @csrf
                                 <input type="submit" class="btn @if ($user->is_admin) btn-secondary @else btn-warning @endif" name="toggle"
-                                value="{{ $user->is_admin ? 'unadmin' : 'admin' }}">
+                                value="{{ $user->is_admin ? 'حذف ادمین' : 'ادمین کردن' }}">
                             </form>
                         </div>
                     </div>
