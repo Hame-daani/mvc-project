@@ -4,7 +4,7 @@
             <div class="col-md-3">
                 <img src="{{ $book->img }}" alt="">
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="card-body">
                     <h2 class="card-title">{{ $book->title }}</h2>
                     <p class="card-text">{{ $book->info }}</p>

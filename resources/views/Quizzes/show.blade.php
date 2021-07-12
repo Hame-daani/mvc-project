@@ -21,7 +21,7 @@
         </div>
         <div class="card">
             <div class="row g-0 justify-content-center">
-                <div class="col-md-5">
+                <div class="col-md-8">
                     <div class="card-body">
                         <h4 class="card-title">
                             Questions
