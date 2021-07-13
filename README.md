@@ -1,3 +1,5 @@
+# MVC Project
+
 <div dir="rtl">
 این سایت به عنوان یک پروژه درسی به منظور آشنایی با MVC Design Pattern و همچنین یادگیری Laravel Framework طراحی شده است.
 
