@@ -44,7 +44,7 @@ class QuizController extends Controller
     {
         $this->authorize('view', $quiz);
         $quiz->load('questions.options');
-        $attempt = $quiz->attempts(Auth::id())->first();
+        $attempt = $quiz->attempts()->where('user_id', Auth::id())->first();
         if ($attempt) {
             $answers = $quiz->answers()->where('user_id', Auth::id())->pluck('option_id')->toArray();
         }
@@ -84,6 +84,8 @@ class QuizController extends Controller
     public function attempt(Quiz $quiz, Request $request)
     {
         $this->authorize('attempt', $quiz);
+        if (!$quiz->is_active)
+            return back();
         $input = $request->input('answers');
         $user = Auth::user();
         $score = 0;

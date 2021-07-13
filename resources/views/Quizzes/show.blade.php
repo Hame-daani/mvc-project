@@ -84,11 +84,11 @@
                                 <br>
                             @endforeach
                             <input class="btn btn-primary" type="submit" value="ثبت" @cannot('attempt', $quiz) disabled
-                                @endcannot>
-                        </form>
+                                    @endcannot @unless($quiz->is_active) disabled @endunless>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</x-base>
+    </x-base>
