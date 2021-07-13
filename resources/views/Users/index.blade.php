@@ -18,7 +18,7 @@
                             <form action="{{ route('users.toggle', ['user' => $user->id]) }}" method="post">
                                 @csrf
                                 <input type="submit" class="btn @if ($user->is_active) btn-danger @else btn-success @endif" name="toggle"
-                                value="{{ $user->is_active ? 'آنبلاک کاربر' : 'بلاک کاربر' }}">
+                                value="{{ $user->is_active ? 'بلاک کاربر' : 'آنبلاک کاربر' }}">
                             </form>
                         </div>
                         <div class="col-5 col-md-6">
