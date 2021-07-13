@@ -1,4 +1,7 @@
 <x-base>
+    <x-slot name="title">
+        Show Book
+    </x-slot>
     <div class="card">
         <div class="row g-0">
             <div class="col-md-3">

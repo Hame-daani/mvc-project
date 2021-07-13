@@ -1,4 +1,7 @@
 <x-base>
+    <x-slot name="title">
+        Show User
+    </x-slot>
     <div class="container">
         <div class="card">
             <div class="card-body">

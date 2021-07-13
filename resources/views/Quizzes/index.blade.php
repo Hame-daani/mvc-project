@@ -1,4 +1,7 @@
 <x-base>
+    <x-slot name="title">
+        Quizzes
+    </x-slot>
     <div class="row g-0 justify-content-center">
         <ul class="list-group col-md-8">
             @foreach ($quizzes as $quiz)

@@ -1,4 +1,7 @@
 <x-base>
+    <x-slot name="title">
+        Edit Quiz
+    </x-slot>
     <div class="container">
         <div class="card">
             <div class="row g-0 justify-content-center">

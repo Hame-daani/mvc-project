@@ -1,4 +1,7 @@
 <x-base>
+    <x-slot name="title">
+        Home
+    </x-slot>
     <div class="container">
         <div class="row g-0 justify-content-center">
             <div class="col-md-8">

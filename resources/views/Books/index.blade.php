@@ -1,4 +1,7 @@
 <x-base>
+    <x-slot name="title">
+        Books
+    </x-slot>
     <ul class="list-group">
         @foreach ($books as $book)
             <li class="list-group-item list-group-item-action"><a
