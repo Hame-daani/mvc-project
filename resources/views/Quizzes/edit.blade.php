@@ -48,7 +48,7 @@
                                 <div class="row g-0 justify-content-center">
                                     <div class="col-md-10">
                                         <div class="card-body">
-                                            <h3 class="card-title">{{ $question->text }}</h3>
+                                            <h3 class="card-title" dir="ltr">{{ $question->text }}</h3>
                                             <form
                                                 action="{{ route('questions.update', ['question' => $question->id]) }}"
                                                 method="POST">

@@ -35,7 +35,7 @@
                         <form action="{{ route('quizzes.attempt', ['quiz' => $quiz->id]) }}" method="post">
                             @csrf
                             @foreach ($quiz->questions as $question)
-                                <p class="lead">
+                                <p class="lead" dir="ltr">
                                     {{ $question->text }}
                                 </p>
                                 @foreach ($question->options as $option)
@@ -46,11 +46,13 @@
                                                 value="{{ $option->id }}" disabled checked>
                                             @if ($option->is_right)
                                                 {{-- user is right --}}
-                                                <label class="btn btn-outline-success" for="option{{ $option->id }}">
+                                                <label class="btn btn-outline-success" for="option{{ $option->id }}"
+                                                    dir="ltr">
                                                     {{ $option->text }}
                                                 </label>
                                                 @else{{-- user is wrong --}}
-                                                <label class="btn btn-outline-danger" for="option{{ $option->id }}">
+                                                <label class="btn btn-outline-danger" for="option{{ $option->id }}"
+                                                    dir="ltr">
                                                     {{ $option->text }}
                                                 </label>
                                             @endif
@@ -60,14 +62,16 @@
                                                 <input type="radio" class="btn-check" name=""
                                                     id="option{{ $option->id }}" value="{{ $option->id }}"
                                                     disabled checked>
-                                                <label class="btn btn-outline-success" for="option{{ $option->id }}">
+                                                <label class="btn btn-outline-success" for="option{{ $option->id }}"
+                                                    dir="ltr">
                                                     {{ $option->text }}
                                                 </label>
                                                 @else{{-- others --}}
                                                 <input type="radio" class="btn-check" name=""
                                                     id="option{{ $option->id }}" value="{{ $option->id }}"
                                                     disabled>
-                                                <label class="btn btn-outline-primary" for="option{{ $option->id }}">
+                                                <label class="btn btn-outline-primary" for="option{{ $option->id }}"
+                                                    dir="ltr">
                                                     {{ $option->text }}
                                                 </label>
                                             @endif
@@ -75,7 +79,8 @@
                                         @else{{-- not attempted --}}
                                         <input type="radio" class="btn-check" name="answers[{{ $question->id }}]"
                                             id="option{{ $option->id }}" value="{{ $option->id }}">
-                                        <label class="btn btn-outline-primary" for="option{{ $option->id }}">
+                                        <label class="btn btn-outline-primary" for="option{{ $option->id }}"
+                                            dir="ltr">
                                             {{ $option->text }}
                                         </label>
                                     @endif
