@@ -59,7 +59,7 @@ class BookController extends Controller
         $this->authorize('admin');
         $input = collect(request()->all())->filter()->all();
         $book->update($input);
-        return redirect()->route('Books.show', $book->id);
+        return redirect()->route('books.show', $book->id);
     }
 
     public function destroy(Book $book)
