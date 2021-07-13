@@ -19,9 +19,11 @@
                         {{ $quiz->attempts()->where('user_id', Auth::id())->first()->pivot->score }}
                     </div>
                 @endcannot
-                <a class="btn btn-secondary" href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">ویرایش این
-                    کوییز</a>
-            </div>
+                @can('update', $quiz)
+                    <a class="btn btn-secondary" href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">ویرایش این
+                        کوییز</a>
+                </div>
+            @endcan
         </div>
         <div class="card">
             <div class="row g-0 justify-content-center">
