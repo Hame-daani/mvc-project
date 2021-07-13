@@ -48,7 +48,7 @@ class QuizController extends Controller
         if ($attempt) {
             $answers = $quiz->answers()->where('user_id', Auth::id())->pluck('option_id')->toArray();
         }
-        return view('quizzes.show')->with(['quiz' => $quiz, 'answers' => $attempt ? $answers : null]);
+        return view('Quizzes.show')->with(['quiz' => $quiz, 'answers' => $attempt ? $answers : null]);
     }
 
     public function edit(Quiz $quiz)

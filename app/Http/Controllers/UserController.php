@@ -29,7 +29,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user);
-        return view('users.edit')->with(['user' => $user]);
+        return view('Users.edit')->with(['user' => $user]);
     }
 
     public function update(Request $request, User $user)
@@ -59,6 +59,6 @@ class UserController extends Controller
     public function topusers()
     {
         $users = User::all()->sortByDesc('scores')->values()->take(10);
-        return view('users.tops')->with(['users' => $users]);
+        return view('Users.tops')->with(['users' => $users]);
     }
 }

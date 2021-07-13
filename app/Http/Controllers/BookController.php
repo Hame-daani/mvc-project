@@ -15,7 +15,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::without('quizzes')->get();
-        return view('books.index')->with(['books' => $books]);
+        return view('Books.index')->with(['books' => $books]);
     }
 
     public function create()
@@ -45,13 +45,13 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->load('quizzes');
-        return view('books.show')->with(['book' => $book]);
+        return view('Books.show')->with(['book' => $book]);
     }
 
     public function edit(Book $book)
     {
         $this->authorize('admin');
-        return view('books.edit')->with(['book' => $book]);
+        return view('Books.edit')->with(['book' => $book]);
     }
 
     public function update(Request $request, Book $book)
@@ -59,7 +59,7 @@ class BookController extends Controller
         $this->authorize('admin');
         $input = collect(request()->all())->filter()->all();
         $book->update($input);
-        return redirect()->route('books.show', $book->id);
+        return redirect()->route('Books.show', $book->id);
     }
 
     public function destroy(Book $book)
