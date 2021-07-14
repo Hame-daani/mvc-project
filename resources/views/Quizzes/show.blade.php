@@ -19,6 +19,8 @@
                         {{ $quiz->attempts()->where('user_id', Auth::id())->first()->pivot->score }}
                     </div>
                 @endcannot
+                <a class="btn btn-primary" href="{{ route('books.show', ['book' => $quiz->book->id]) }}">برگشت به
+                    کتاب</a>
                 @can('update', $quiz)
                     <a class="btn btn-secondary" href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">ویرایش این
                         کوییز</a>

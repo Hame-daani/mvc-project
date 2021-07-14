@@ -25,6 +25,10 @@
                             <input type="submit" class="btn btn-danger" name="delete" value="حذف این کوییز"
                                 onclick="return confirm('آیا مطمئن هستید که می‌خواهید این کوییز را حذف کنید؟');">
                         </form>
+                        <br>
+                        <a class="btn btn-secondary" href="{{ route('quizzes.show', ['quiz' => $quiz->id]) }}">برگشت
+                            به
+                            کوییز</a>
                     </div>
                 </div>
             </div>
