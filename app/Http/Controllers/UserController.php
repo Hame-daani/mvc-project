@@ -42,7 +42,7 @@ class UserController extends Controller
 
     public function toggle(User $user)
     {
-        $this->authorize('update', $user);
+        $this->authorize('admin');
         $user->is_active = !$user->is_active;
         $user->save();
         return back();
@@ -50,7 +50,7 @@ class UserController extends Controller
 
     public function admin(User $user)
     {
-        $this->authorize('update', $user);
+        $this->authorize('admin');
         $user->is_admin = !$user->is_admin;
         $user->save();
         return back();
