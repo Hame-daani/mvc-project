@@ -36,10 +36,5 @@ class AuthServiceProvider extends ServiceProvider
                 ? Response::allow()
                 : Response::deny('You must be an administrator.');
         });
-        Gate::define('attempt', function (User $user, Quiz $quiz) {
-            if ($user->attempts()->where('quiz_id', $quiz->id)->exists())
-                return Response::deny('You can not attempt this quiz!');
-            return Response::allow();
-        });
     }
 }
