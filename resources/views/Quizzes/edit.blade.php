@@ -60,7 +60,7 @@
                                                 @csrf
                                                 <div class="mb-3">
                                                     <input type="text" class="form-control" name="text" id="q_text"
-                                                        placeholder="{{ $question->text }}">
+                                                        placeholder="{{ $question->text }}" dir="ltr">
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">آپدیت این سوال</button>
                                             </form>

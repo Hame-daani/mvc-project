@@ -9,8 +9,8 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h2 class="card-title">{{ $book->title }}</h2>
-                    <p class="card-text">{{ $book->info }}</p>
+                    <h2 class="card-title" dir="ltr">{{ $book->title }}</h2>
+                    <p class="card-text" dir="ltr">{{ $book->info }}</p>
                     <p class="card-text"><small class="text-muted">آخرین بار در تاریخ {{ $book->updated_at }} آپدیت
                             شده است</small></p>
                     <a href="{{ $book->link }}" class="btn btn-primary" role="button">خواندن کتاب</a>
